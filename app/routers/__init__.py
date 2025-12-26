@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from app.routers import auth, products, categories, cart, orders, addresses, favorites, footprints, search, coupons, reviews, banners
+from app.routers import auth, products, categories, cart, orders, addresses, favorites, footprints, search, coupons, reviews, banners, admin
 
 api_router = APIRouter(prefix="/api/v1")
 
@@ -15,3 +15,4 @@ api_router.include_router(search.router, prefix="/search", tags=["搜索"])
 api_router.include_router(coupons.router, prefix="/coupons", tags=["优惠券"])
 api_router.include_router(reviews.router, prefix="/reviews", tags=["评价"])
 api_router.include_router(banners.router, prefix="/banners", tags=["轮播图"])
+api_router.include_router(admin.router, prefix="/admin", tags=["管理后台"])

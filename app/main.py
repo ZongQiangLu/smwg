@@ -1,9 +1,11 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from contextlib import asynccontextmanager
 from app.config import settings
 from app.database import init_db, close_db
 from app.routers import api_router
+import os
 
 async def init_sample_data():
     """初始化示例数据"""
@@ -91,6 +93,11 @@ app.add_middleware(
 )
 
 app.include_router(api_router)
+
+# 挂载管理后台静态文件
+admin_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "admin")
+if os.path.exists(admin_path):
+    app.mount("/admin", StaticFiles(directory=admin_path, html=True), name="admin")
 
 @app.get("/")
 async def root():
