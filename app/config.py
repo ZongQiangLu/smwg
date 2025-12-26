@@ -14,7 +14,7 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", "120"))
     
     # CORS - 生产环境设置具体域名
-    CORS_ORIGINS: list = os.getenv("CORS_ORIGINS", "*").split(",")
+    CORS_ORIGINS: str = os.getenv("CORS_ORIGINS", "*")
     
     class Config:
         env_file = ".env"
